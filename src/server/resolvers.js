@@ -1,7 +1,6 @@
-const resolvers = {
-  RootQuery: {
-    hello: () => 'world'
-  }
-}
+const loadResolvers = require('../utils/load-resolvers')
+const { resolve } = require('path')
 
-module.exports = resolvers
+module.exports = {
+  loadResolvers: () => loadResolvers(resolve(__dirname, '../resolvers'))
+}

@@ -4,7 +4,7 @@ const { getConfig } = require('./utils/config')
 const { showServerInfo } = require('./utils/server-info')
 const { contextFactory } = require('./context')
 const { factoryPlaygroundOptions } = require('./playground')
-const resolvers = require('./resolvers')
+const { loadResolvers } = require('./resolvers')
 
 let started = false
 
@@ -27,14 +27,14 @@ const serverFactory = async () => {
     return Promise.reject(new Error('server was created'))
   }
 
+  started = true
+
   const config = getConfig()
 
   // need to be imported after handling the env
   const debug = require('./utils/debug')
 
-  const typeDefs = await loadTypeDefs()
-
-  started = true
+  const [typeDefs, resolvers] = await Promise.all([loadTypeDefs(), loadResolvers()])
 
   const isProduction = config.NODE_ENV === 'production'
 
