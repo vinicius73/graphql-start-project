@@ -3,6 +3,7 @@ const { loadTypeDefs } = require('./type-defs')
 const { getConfig } = require('./utils/config')
 const { showServerInfo } = require('./utils/server-info')
 const { contextFactory } = require('./context')
+const { factoryPlaygroundOptions } = require('./playground')
 const resolvers = require('./resolvers')
 
 let started = false
@@ -35,11 +36,15 @@ const serverFactory = async () => {
 
   started = true
 
+  const isProduction = config.NODE_ENV === 'production'
+
   const server = new ApolloServer({
     cors: true,
     resolvers,
     typeDefs,
-    tracing: config.NODE_ENV !== 'production',
+    tracing: !isProduction,
+    introspection: !isProduction,
+    playground: factoryPlaygroundOptions(config),
     context: contextFactory({ config, debug })
   })
 
