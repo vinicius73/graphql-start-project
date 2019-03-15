@@ -1,11 +1,6 @@
 const { ApolloServer } = require('apollo-server')
 const { loadTypeDefs } = require('./type-defs')
-
-const resolvers = {
-  RootQuery: {
-    hello: () => 'world'
-  }
-}
+const resolvers = require('./resolvers')
 
 const factoryIntance = async () => {
   const typeDefs = await loadTypeDefs()
