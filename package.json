@@ -22,6 +22,7 @@
     "debug": "^4.1.1",
     "dotenv": "^7.0.0",
     "graphql": "^14.1.1",
+    "graphql-query-compress": "^1.2.1",
     "lodash": "^4.17.11",
     "pm2": "^3.4.0",
     "ramda": "^0.26.1",

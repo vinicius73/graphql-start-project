@@ -1742,6 +1742,13 @@ graphql-extensions@0.5.7:
   dependencies:
     "@apollographql/apollo-tools" "^0.3.3"
 
+graphql-query-compress@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/graphql-query-compress/-/graphql-query-compress-1.2.1.tgz#262c2e0e625d827cca6a7149758e33b8ec095a7e"
+  integrity sha512-p2r8YBkf0wJ6yn1hoKcZPeShGC9I1DhIDAdKqlg0ojx/Zmqv4zm7+birwWKWdyT73Ccdf/UffXAJkNaVRhNSRQ==
+  dependencies:
+    tokenizr "1.5.2"
+
 graphql-subscriptions@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/graphql-subscriptions/-/graphql-subscriptions-1.0.0.tgz#475267694b3bd465af6477dbab4263a3f62702b8"
@@ -3671,6 +3678,11 @@ toidentifier@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
   integrity sha512-yaOH/Pk/VEhBWWTlhI+qXxDFXlejDGcQipMlyxda9nthulaxLZUNcUqFxokp0vcYnvteJln5FNQDRrxj3YcbVw==
+
+tokenizr@1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/tokenizr/-/tokenizr-1.5.2.tgz#ea3d3617985162d6111da831a933e59dfb6975d7"
+  integrity sha512-a+bFPOG6Zlelf5zCTpvrFOewqvip0PGrEW8JRZ9Uuz6sNSbedLQbp2sfR+M8ABXq7EmqwxrLxgqZl+KXfBwXYA==
 
 ts-invariant@^0.2.1:
   version "0.2.1"

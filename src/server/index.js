@@ -2,6 +2,7 @@ const { ApolloServer } = require('apollo-server')
 const { loadTypeDefs } = require('./type-defs')
 const { getConfig } = require('./utils/config')
 const { showServerInfo } = require('./utils/server-info')
+const { contextFactory } = require('./context')
 const resolvers = require('./resolvers')
 
 let started = false
@@ -37,7 +38,9 @@ const serverFactory = async () => {
   const server = new ApolloServer({
     cors: true,
     resolvers,
-    typeDefs
+    typeDefs,
+    tracing: config.NODE_ENV !== 'production',
+    context: contextFactory({ config, debug })
   })
 
   const info = await server.listen({ port: getPort(config) })
