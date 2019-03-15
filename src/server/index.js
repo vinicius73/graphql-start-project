@@ -1,24 +1,53 @@
 const { ApolloServer } = require('apollo-server')
 const { loadTypeDefs } = require('./type-defs')
+const { getConfig } = require('./utils/config')
+const { showServerInfo } = require('./utils/server-info')
 const resolvers = require('./resolvers')
 
-const factoryIntance = async () => {
-  const typeDefs = await loadTypeDefs()
+let started = false
 
-  return new ApolloServer({
-    resolvers,
-    typeDefs
-  })
+/**
+ * get server port
+ * @param {config} config
+ * @returns {number}
+ */
+const getPort = config => {
+  if (config.PORT) {
+    return config.PORT
+  }
+
+  return process.env.PORT || 8081
 }
 
 const serverFactory = async () => {
-  const server = await factoryIntance()
+  // prevents the server from starting more than once.
+  if (started) {
+    return Promise.reject(new Error('server was created'))
+  }
 
-  return new Promise((resolve, reject) => {
-    server.listen().then(() => {
-      resolve(server)
-    }, reject)
+  const config = getConfig()
+
+  // need to be imported after handling the env
+  const debug = require('./utils/debug')
+
+  const typeDefs = await loadTypeDefs()
+
+  started = true
+
+  const server = new ApolloServer({
+    cors: true,
+    resolvers,
+    typeDefs
   })
+
+  const info = await server.listen({ port: getPort(config) })
+
+  await showServerInfo(config, info)
+
+  console.log(`🚀  Server ready (${config.NODE_ENV || 'development'})`)
+
+  // allows extra manipulation of this variables
+  return { server, info, config, debug }
 }
 
 module.exports = { serverFactory }
