@@ -41,8 +41,9 @@ exports.seed = async knex => {
     password: basePassword
   })
 
-  // Deletes ALL existing entries
+  await knex.raw('ALTER TABLE users DISABLE TRIGGER ALL')
   await knex('users').del()
+  await knex.raw('ALTER TABLE users ENABLE TRIGGER ALL')
 
   // Inserts seed entries
   return knex('users').insert(entries)

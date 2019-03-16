@@ -12,6 +12,7 @@
     "setup": "yarn install && yarn run knex:migrate",
     "setup:dev": "yarn run setup && yarn run knex:seed",
     "knex:migrate": "knex migrate:latest",
+    "knex:rollback": "knex migrate:rollback",
     "knex:seed": "knex seed:run",
     "startup:prod": "NODE_ENV=production yarn run setup && yarn run start:prod",
     "startup:dev": "NODE_ENV=development yarn run setup && yarn run start:dev",
