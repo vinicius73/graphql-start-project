@@ -3198,6 +3198,11 @@ pkg-dir@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
+pluralize@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
+  integrity sha512-ARhBOdzS3e41FbkW/XWrTEtukqqLoK5+Z/4UeDaLuSW+39JPeFgs4gCGqsrJHVZX0fUrx//4OF0K1CUGwlIFow==
+
 pm2-axon-rpc@^0.5.0, pm2-axon-rpc@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/pm2-axon-rpc/-/pm2-axon-rpc-0.5.1.tgz#ad3c43c43811c71f13e5eee2821194d03ceb03fe"
