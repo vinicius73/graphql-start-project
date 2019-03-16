@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  # Database
+  postgres:
+    image: postgres:11.2
+    restart: always
+    container_name: "graphql-demo-postgres"
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - "15432:5432"
+  
+  # GraphQL
+  server:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    user: "node"
+    restart: always
+    working_dir: /home/node/app
+    container_name: "graphql-demo-server"
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - ${PORT}:${PORT}
+    command: "npm run startup:prod"

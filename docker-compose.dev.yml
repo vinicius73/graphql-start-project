@@ -1,0 +1,37 @@
+version: '3'
+
+networks:
+    app-network:
+        driver: bridge
+
+services:
+  # Database
+  postgres:
+    networks:
+      - app-network
+  
+  # GraphQL
+  server:
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=development
+    command: "npm run startup:dev"
+  
+  # PG Admin
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: "graphql-demo-pgadmin4"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "vinicius73@local.dev"
+      PGADMIN_DEFAULT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - $PWD/data/pgadmin4/servers.json:/pgadmin4/servers.json
+    ports:
+      - "16543:80"
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    networks:
+      - app-network
