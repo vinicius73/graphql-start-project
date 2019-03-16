@@ -38,6 +38,14 @@ const getToken = req => {
   }
 }
 
+const makeProxyContext = original => {
+  return new Proxy(original, {
+    get: (target, prop) => {
+      return target[prop] || target.services[prop]
+    }
+  })
+}
+
 const contextFactory = ({ debug, config }) => {
   const serviceFatory = services.factory(config, debug)
 
@@ -46,11 +54,13 @@ const contextFactory = ({ debug, config }) => {
 
     const token = getToken(req)
 
-    return Promise.resolve({
-      token,
-      debug,
-      services: serviceFatory(token)
-    })
+    return Promise.resolve(
+      makeProxyContext({
+        token,
+        debug,
+        services: serviceFatory(token)
+      })
+    )
   }
 }
 
