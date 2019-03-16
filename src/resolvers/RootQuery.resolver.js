@@ -1,3 +1,7 @@
 module.exports = {
-  hello: () => 'world'
+  Users: (root, args, { services }) => {
+    const { db } = services
+
+    return db('users')
+  }
 }

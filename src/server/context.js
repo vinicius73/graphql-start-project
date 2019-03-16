@@ -1,3 +1,5 @@
+const { last, isEmpty } = require('lodash')
+const services = require('../services')
 const graphqlQueryCompress = require('graphql-query-compress')
 
 const debugRequest = req => {
@@ -12,12 +14,42 @@ const debugRequest = req => {
   console.log('request on: %s \n -> %s \n', new Date(), query)
 }
 
+/**
+ * extract token from request
+ *
+ * @todo implement auth system
+ * @param {request} req
+ *
+ * @returns {String|Boolean}
+ */
+const getToken = req => {
+  try {
+    const header = (req.header('authorization') || req.header('Authorization'))
+    const values = (header || '').split(' ')
+
+    const token = last(values)
+
+    return isEmpty(token)
+      ? false
+      : token
+  } catch (e) {
+    console.warn(e)
+    return false
+  }
+}
+
 const contextFactory = ({ debug, config }) => {
+  const serviceFatory = services.factory(config, debug)
+
   return ({ req }) => {
     debugRequest(req)
 
+    const token = getToken(req)
+
     return Promise.resolve({
-      debug
+      token,
+      debug,
+      services: serviceFatory(token)
     })
   }
 }

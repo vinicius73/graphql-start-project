@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "apollo-server": "^2.4.8",
+    "awilix": "^4.2.1",
     "bcrypt": "^3.0.4",
     "config": "^3.0.1",
     "debug": "^4.1.1",

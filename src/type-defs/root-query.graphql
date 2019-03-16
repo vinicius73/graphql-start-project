@@ -1,4 +1,4 @@
 type RootQuery {
-  "A simple type for getting started!"
-  hello: String
+  "A simple list of users"
+  Users: [User]!
 }
