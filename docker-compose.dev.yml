@@ -35,3 +35,5 @@ services:
       - postgres
     networks:
       - app-network
+    logging:
+      driver: none

@@ -13,7 +13,15 @@ module.exports = {
   NODE_ENV: process.env.NODE_ENV,
   APP_KEY: process.env.APP_KEY || 'no key',
   services: {
-
+    database: {
+      client: 'pg',
+      connection: {
+        host: process.env.DB_HOST || 'portgres',
+        database: process.env.DB_NAME || 'demo',
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD
+      }
+    }
   },
   env: {
     DEBUG_COLORS: true
