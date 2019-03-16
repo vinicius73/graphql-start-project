@@ -1,4 +1,4 @@
 type RootQuery {
-  "A simple list of users"
-  Users: [User]!
+  Users(pagination: PaginationInput): UsersResource!
+  User (id: ID!): User!
 }

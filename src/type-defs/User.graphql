@@ -1,4 +1,9 @@
-type User {
+type User implements IRecord {
   id: ID!
   email: String!
+}
+
+type UsersResource implements IResource {
+  pagination: Pagination!
+  records: [User]!
 }

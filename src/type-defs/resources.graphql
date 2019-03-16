@@ -1,0 +1,20 @@
+interface IResource {
+  pagination: Pagination!
+  records: [IRecord]!
+}
+
+interface IRecord {
+  id: ID!
+}
+
+type Pagination {
+  per_page: Int!
+  current_page: Int!
+  total_pages: Int!
+  total_records: Int!
+}
+
+input PaginationInput {
+  page: Int
+  per_page: Int
+}
