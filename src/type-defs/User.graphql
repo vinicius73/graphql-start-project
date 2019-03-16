@@ -1,6 +1,7 @@
 type User implements IRecord {
   id: ID!
   email: String!
+  name: String!
 }
 
 type UsersResource implements IResource {
