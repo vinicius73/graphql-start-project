@@ -1,7 +1,7 @@
 const { last, isEmpty } = require('lodash')
 const { makeServicesFactoy } = require('../services')
 const graphqlQueryCompress = require('graphql-query-compress')
-const { generateDataLoaders } = require('../utils/knex-dataloaders')
+const { generateDataLoaders } = require('../utils/knex/dataloaders')
 const resources = require('../resolvers/resources')
 
 const debugRequest = req => {

@@ -1,7 +1,6 @@
 const DataLoader = require('dataloader')
 const { reduce, map } = require('lodash')
-const { normalizeResources } = require('../knex-resolvers/normalize')
-const { queryFactory } = require('../knex-resolvers/query')
+const { normalizeResources, queryFactory } = require('../resources')
 
 const loadData = (resourceConfig, db, id) => {
   const query = queryFactory(db, resourceConfig, { id })

@@ -1,5 +1,5 @@
 const { parsePagination } = require('./utils')
-const { isEmpty } = require('lodash')
+const { map, isEmpty } = require('lodash')
 
 const queryFactory = (db, resourceConfig, filters = {}, pagination = {}) => {
   const { table, applyWhere } = resourceConfig
@@ -23,4 +23,14 @@ const queryFactory = (db, resourceConfig, filters = {}, pagination = {}) => {
   return query
 }
 
-module.exports = { queryFactory }
+const normalizeResources = tables => {
+  return map(tables, row => {
+    return {
+      ...row,
+      resource: row.resource || row.table,
+      applyWhere: row.applyWhere || {}
+    }
+  })
+}
+
+module.exports = { normalizeResources, queryFactory }

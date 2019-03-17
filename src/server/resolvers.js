@@ -1,5 +1,5 @@
 const loadResolvers = require('../utils/load-resolvers')
-const { generateResolvers } = require('../utils/knex-resolvers')
+const { generateResolvers } = require('../utils/knex/resolvers')
 const { resolve } = require('path')
 const { defaultsDeep } = require('lodash')
 

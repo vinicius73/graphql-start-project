@@ -1,6 +1,6 @@
 const { isEmpty, first, divide } = require('lodash')
-const { queryFactory } = require('./query')
-const { makeSingleName, parsePagination } = require('./utils')
+const { queryFactory } = require('../resources')
+const { makeSingleName, parsePagination } = require('../utils')
 
 const makeSingleResolver = resourceConfig => {
   return (root, { id }, { services }) => {
