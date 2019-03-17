@@ -1,30 +1,28 @@
-const DataLoader = require('dataloader')
-const { reduce, map } = require('lodash')
-const { normalizeResources, queryFactory } = require('../resources')
+const { map } = require('lodash')
+const { normalizeResources } = require('../resources')
+const { factoryDataLoaderBuilder } = require('./factory')
 
-const loadData = (resourceConfig, db, id) => {
-  const query = queryFactory(db, resourceConfig, { id })
-  return query
-    .first()
-}
+const generateDataLoaders = (resourcesRaw, services) => {
+  const cache = {}
 
-const factoryBatchingFunc = (resourceConfig, services) => {
-  return ids => {
-    const { db } = services
-    return Promise.all(
-      map(ids, id => loadData(resourceConfig, db, id))
-    )
-  }
-}
+  const resources = normalizeResources(resourcesRaw)
+  const factory = factoryDataLoaderBuilder(resources, services)
 
-const generateDataLoaders = (resources, services) => {
-  return reduce(normalizeResources(resources), (acc, resourceConfig) => {
-    const { resource } = resourceConfig
+  return new Proxy(cache, {
+    set () {
+      throw new Error(`it is not possible to modify the dataLoader.`)
+    },
+    ownKeys () {
+      return map(resources, 'resource')
+    },
+    get (target, prop) {
+      if (!target[prop]) {
+        cache[prop] = factory(prop)
+      }
 
-    acc[resource] = new DataLoader(factoryBatchingFunc(resourceConfig, services))
-
-    return acc
-  }, {})
+      return target[prop]
+    }
+  })
 }
 
 module.exports = { generateDataLoaders }
