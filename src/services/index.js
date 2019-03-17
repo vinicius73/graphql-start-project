@@ -9,8 +9,8 @@ const { factoryTokenInject } = require('./container')
  *
  * @returns {Function}
  */
-const factory = (config, debug) => {
+const makeServicesFactoy = (config, debug) => {
   return factoryTokenInject(config, debug, factories)
 }
 
-module.exports = { factory }
+module.exports = { makeServicesFactoy }

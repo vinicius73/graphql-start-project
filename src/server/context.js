@@ -1,6 +1,8 @@
 const { last, isEmpty } = require('lodash')
-const services = require('../services')
+const { makeServicesFactoy } = require('../services')
 const graphqlQueryCompress = require('graphql-query-compress')
+const { generateDataLoaders } = require('../utils/knex-dataloaders')
+const resources = require('../resolvers/resources')
 
 const debugRequest = req => {
   let query
@@ -38,29 +40,24 @@ const getToken = req => {
   }
 }
 
-const makeProxyContext = original => {
-  return new Proxy(original, {
-    get: (target, prop) => {
-      return target[prop] || target.services[prop]
-    }
-  })
-}
-
 const contextFactory = ({ debug, config }) => {
-  const serviceFatory = services.factory(config, debug)
+  const serviceFatory = makeServicesFactoy(config, debug)
 
   return ({ req }) => {
     debugRequest(req)
 
     const token = getToken(req)
 
-    return Promise.resolve(
-      makeProxyContext({
-        token,
-        debug,
-        services: serviceFatory(token)
-      })
-    )
+    const services = serviceFatory(token)
+
+    const context = {
+      token,
+      debug,
+      services,
+      dataLoaders: generateDataLoaders(resources, services)
+    }
+
+    return Promise.resolve(context)
   }
 }
 

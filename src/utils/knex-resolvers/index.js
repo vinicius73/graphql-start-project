@@ -1,19 +1,10 @@
-const { reduce, map } = require('lodash')
+const { reduce } = require('lodash')
 const { makeListResolver, makeResourceResolver, makeSingleResolver } = require('./resolvers')
 const { makeListName, makeSingleName, makeResourceName } = require('./utils')
-
-const normaliseResources = tables => {
-  return map(tables, row => {
-    return {
-      ...row,
-      resource: row.resource || row.table,
-      applyWhere: row.applyWhere || {}
-    }
-  })
-}
+const { normalizeResources } = require('./normalize')
 
 const generateResolvers = resources => {
-  return reduce(normaliseResources(resources), (acc, resourceConfig) => {
+  return reduce(normalizeResources(resources), (acc, resourceConfig) => {
     const { resource } = resourceConfig
 
     acc.RootQuery[makeSingleName(resource)] = makeSingleResolver(resourceConfig)

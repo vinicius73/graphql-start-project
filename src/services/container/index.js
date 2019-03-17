@@ -7,7 +7,8 @@ const factoryTokenInject = (config, debug, factories) => {
     const scoped = container.createScope()
 
     scoped.register({
-      token: asValue(token)
+      token: asValue(token),
+      has: asValue(container.has.bind(container))
     })
 
     return scoped.cradle

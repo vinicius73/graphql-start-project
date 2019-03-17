@@ -3,8 +3,8 @@ type RootQuery {
   User (id: ID!): User!
 
   Clients(pagination: PaginationInput): ClientsResource!
-  Client (id: ID!): User!
+  Client (id: ID!): Client!
 
   Products(pagination: PaginationInput): ProductsResource!
-  Product (id: ID!): User!
+  Product (id: ID!): Product!
 }
