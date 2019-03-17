@@ -1,0 +1,13 @@
+type Product implements IRecord {
+  id: ID!
+  name: String!
+  description: String
+  created_at: String!
+  update_at: String!
+  client: Client!
+}
+
+type ProductsResource implements IResource {
+  pagination: Pagination!
+  records: [Product]!
+}

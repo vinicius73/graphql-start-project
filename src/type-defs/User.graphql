@@ -2,6 +2,7 @@ type User implements IRecord {
   id: ID!
   email: String!
   name: String!
+  clients: [Client]!
 }
 
 type UsersResource implements IResource {

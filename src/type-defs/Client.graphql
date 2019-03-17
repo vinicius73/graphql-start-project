@@ -1,0 +1,13 @@
+type Client implements IRecord {
+  id: ID!
+  name: String!
+  user: User!
+  created_at: String!
+  update_at: String!
+  products: [Product]!
+}
+
+type ClientsResource implements IResource {
+  pagination: Pagination!
+  records: [Client]!
+}
