@@ -1,11 +1,5 @@
-const {
-  composeP, compose,
-  contains,
-  cond, split,
-  head, T,
-  replace
-} = require('ramda')
-const { loadFilesNames, loadFiles } = require('./common')
+const { composeP } = require('ramda')
+const { loadFilesNames, loadFiles, makeGetName } = require('./common')
 
 /**
  * load a list of resolvers files
@@ -19,10 +13,7 @@ const loadResolversFilesNames = loadFilesNames('**/**.resolver.js')
  * @param {String} fileName
  * @returns {String}
  */
-const getName = cond([
-  [contains('/'), compose(head, split('/'))],
-  [T, replace('.resolver.js', '')]
-])
+const getName = makeGetName('.resolver.js')
 
 const loadResolvers = dirName => {
   return composeP(loadFiles(getName, dirName), loadResolversFilesNames)(dirName)

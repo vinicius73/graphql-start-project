@@ -1,4 +1,10 @@
-const { curry, compose, map, reduce } = require('ramda')
+const {
+  compose, curry,
+  contains, map,
+  cond, split,
+  head, T,
+  replace, reduce
+} = require('ramda')
 const { readFile } = require('fs')
 const { join } = require('path')
 const readdir = require('readdir-enhanced')
@@ -77,4 +83,13 @@ const loadFiles = curry((getNameFn, dirname, files) => {
   }, {}, files)
 })
 
-module.exports = { loadFilesNames, loadFilesContent, loadFiles }
+/**
+ * @param {String} sufix
+ * @returns {Function<String>}
+ */
+const makeGetName = sufix => cond([
+  [contains('/'), compose(head, split('/'))],
+  [T, replace(sufix, '')]
+])
+
+module.exports = { loadFilesNames, loadFilesContent, loadFiles, makeGetName }
