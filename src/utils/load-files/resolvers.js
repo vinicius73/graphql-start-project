@@ -1,13 +1,11 @@
 const {
   composeP, compose,
-  contains, reduce,
+  contains,
   cond, split,
   head, T,
-  replace, curry
+  replace
 } = require('ramda')
-
-const { join } = require('path')
-const readdir = require('readdir-enhanced')
+const { loadFilesNames, loadFiles } = require('./common')
 
 /**
  * load a list of resolvers files
@@ -15,9 +13,7 @@ const readdir = require('readdir-enhanced')
  * @param {string} dirname
  * @returns {Promise<Array<String>>}
  */
-const loadResolversFilesNames = dirname => {
-  return readdir(dirname, { deep: 2, filter: '**/**.resolver.js' })
-}
+const loadResolversFilesNames = loadFilesNames('**/**.resolver.js')
 
 /**
  * @param {String} fileName
@@ -28,26 +24,8 @@ const getName = cond([
   [T, replace('.resolver.js', '')]
 ])
 
-/**
- * load resolvers
- *
- * @param {String} dirname
- * @param {Array<String>} files
- *
- * @returns {Object}
- */
-const load = curry((dirname, files) => {
-  return reduce((acc, fileName) => {
-    const fullName = join(dirname, fileName)
-
-    acc[getName(fileName)] = require(fullName)
-
-    return acc
-  }, {}, files)
-})
-
 const loadResolvers = dirName => {
-  return composeP(load(dirName), loadResolversFilesNames)(dirName)
+  return composeP(loadFiles(getName, dirName), loadResolversFilesNames)(dirName)
 }
 
 module.exports = loadResolvers
