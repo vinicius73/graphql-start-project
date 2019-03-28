@@ -1,0 +1,3 @@
+type RootMutations {
+  login (email: String!, password: String!): String!
+}

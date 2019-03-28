@@ -34,7 +34,9 @@ const serverFactory = async () => {
   // need to be imported after handling the env
   const debug = require('./utils/debug')
 
-  const [typeDefs, resolvers] = await Promise.all([loadTypeDefs(), loadResolvers()])
+  const [typeDefs, resolvers] = await Promise.all(
+    [loadTypeDefs(), loadResolvers()]
+  )
 
   const isProduction = config.NODE_ENV === 'production'
 
