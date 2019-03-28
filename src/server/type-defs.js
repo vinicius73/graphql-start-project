@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server')
 const { resolve } = require('path')
-const loadGraphQLFiles = require('../utils/load-graphql-files')
+const loadGraphQLFiles = require('../utils/load-files/graphql')
 
 /**
  * load and generate GraphQL types defs
