@@ -15,6 +15,13 @@ services:
     ports:
       - "15432:5432"
   
+  redis:
+    image: redis:5-alpine
+    restart: always
+    container_name: "graphql-demo-redis"
+    ports:
+        - "16379:6379"
+  
   # GraphQL
   server:
     build:
@@ -26,8 +33,10 @@ services:
     container_name: "graphql-demo-server"
     links:
       - postgres
+      - redis
     depends_on:
       - postgres
+      - redis
     environment:
       - NODE_ENV=development
     volumes:

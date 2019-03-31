@@ -10,6 +10,11 @@ services:
     networks:
       - app-network
   
+  # Redis
+  redis:
+    networks:
+      - app-network
+  
   # GraphQL
   server:
     networks:
