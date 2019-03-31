@@ -27,7 +27,6 @@ const loadUser = ({ auth, cache }, token) => {
 /**
  * extract token from request
  *
- * @todo implement auth system
  * @param {request} req
  *
  * @returns {String|Boolean}
@@ -49,26 +48,35 @@ const getToken = req => {
 }
 
 const contextFactory = ({ debug, config }) => {
+  // service container factory
   const serviceFatory = makeServicesFactoy(config, debug)
 
   return ({ req }) => {
+    // just log received query
     debugRequest(req)
 
+    // get request token
     const token = getToken(req)
 
+    // build services
     const services = serviceFatory(token)
+
+    // generate dataLoaders
+    const dataLoaders = generateDataLoaders(resources, services)
 
     const context = {
       token,
       debug,
       services,
-      dataLoaders: generateDataLoaders(resources, services)
+      dataLoaders
     }
 
+    // have no token, no need try load user
     if (!token) {
       return Promise.resolve(context)
     }
 
+    // load and inject user
     return loadUser(services, token)
       .then(user => {
         return Promise.resolve({

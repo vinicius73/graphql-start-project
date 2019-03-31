@@ -6,6 +6,7 @@ const getConfig = () => {
   const config = require('config')
   const { env } = config
 
+  // inject env config into process.env
   Object.keys(env)
     .forEach(key => {
       process.env[key] = env[key]

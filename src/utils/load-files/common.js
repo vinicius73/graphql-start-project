@@ -88,7 +88,7 @@ const loadFiles = curry((getNameFn, dirname, files) => {
  * @returns {Function<String>}
  */
 const makeGetName = sufix => cond([
-  [contains('/'), compose(head, split('/'))],
+  [contains('/'), compose(head, split('/'))], // if is a subfolder
   [T, replace(sufix, '')]
 ])
 

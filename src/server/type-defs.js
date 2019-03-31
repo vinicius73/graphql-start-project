@@ -9,9 +9,10 @@ const loadGraphQLFiles = require('../utils/load-files/graphql')
  */
 const loadTypeDefs = () => {
   const dirName = resolve(__dirname, '../type-defs')
-  return loadGraphQLFiles(dirName)
-    .then(types => types.join(`\n`))
-    .then(typeDefs => gql`${typeDefs}`)
+
+  return loadGraphQLFiles(dirName) // list of contents
+    .then(types => types.join(`\n`)) // join all files in a single string
+    .then(typeDefs => gql`${typeDefs}`) // apply "gql" function
 }
 
 module.exports = { loadTypeDefs }
