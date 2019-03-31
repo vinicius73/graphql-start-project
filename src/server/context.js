@@ -16,9 +16,12 @@ const debugRequest = req => {
   console.log('request on: %s \n -> %s \n', new Date(), query)
 }
 
-const loadUser = (services, token) => {
-  return services.auth
-    .loadUser(token)
+const loadUser = ({ auth, cache }, token) => {
+  const loader = () => auth.loadUser(token)
+  const key = `token:${token}`
+  const options = { ttl: 900 } // 15min
+
+  return cache.wrap(key, loader, options)
 }
 
 /**
