@@ -2,7 +2,8 @@ type User implements IRecord {
   id: ID!
   email: String!
   name: String!
-  clients: [Client]!
+  is_admin: Boolean! @needAuth(onlyAdmin: true)
+  clients: [Client]! @needAuth(onlyAdmin: true)
 }
 
 type UsersResource implements IResource {

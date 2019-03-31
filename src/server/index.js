@@ -5,6 +5,7 @@ const { showServerInfo } = require('./utils/server-info')
 const { contextFactory } = require('./context')
 const { factoryPlaygroundOptions } = require('./playground')
 const { loadResolvers } = require('./resolvers')
+const { loadDirectives } = require('./directives')
 
 let started = false
 
@@ -34,16 +35,19 @@ const serverFactory = async () => {
   // need to be imported after handling the env
   const debug = require('./utils/debug')
 
-  const [typeDefs, resolvers] = await Promise.all(
-    [loadTypeDefs(), loadResolvers()]
+  const [typeDefs, resolvers, schemaDirectives] = await Promise.all(
+    [loadTypeDefs(), loadResolvers(), loadDirectives()]
   )
 
   const isProduction = config.NODE_ENV === 'production'
+
+  console.log({ schemaDirectives })
 
   const server = new ApolloServer({
     cors: true,
     resolvers,
     typeDefs,
+    schemaDirectives,
     tracing: !isProduction,
     introspection: !isProduction,
     playground: factoryPlaygroundOptions(config),
