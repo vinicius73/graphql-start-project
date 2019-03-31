@@ -21,6 +21,13 @@ module.exports = {
         user: process.env.DB_USER,
         password: process.env.DB_PASSWORD
       }
+    },
+    redis: {
+      host: process.env.REDIS_HOST || 'redis',
+      port: process.env.REDIS_PORT || 6379,
+      // auth_pass: process.env.REDIS_AUTH_PASS || undefined,
+      db: process.env.REDIS_DB || 0,
+      ttl: 600
     }
   },
   env: {

@@ -624,6 +624,11 @@ async-retry@^1.2.1:
   dependencies:
     retry "0.12.0"
 
+async@1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
+  integrity sha1-7GphrlZIDAw8skHJVhjiCJL5Zyo=
+
 async@2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.1.tgz#b245a23ca71930044ec53fa46aa00a3e87c6a610"
@@ -791,6 +796,21 @@ cache-base@^1.0.1:
     to-object-path "^0.3.0"
     union-value "^1.0.0"
     unset-value "^1.0.0"
+
+cache-manager-redis-store@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/cache-manager-redis-store/-/cache-manager-redis-store-1.5.0.tgz#6f9a3a0ec31ca91a5c56cd9b75d6d62ab9a296ab"
+  integrity sha512-otbJO/q5tZa7Q5R6Xb9kG7oEqbuElpJ4Txq1rXGxK531RMkgYXDcFmbxvT4pFlOhuURCTYXJWRaPL3lPndrWig==
+  dependencies:
+    redis "^2.7.1"
+
+cache-manager@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/cache-manager/-/cache-manager-2.9.0.tgz#5e1f6317ca1a25e40ddf365a7162757af152353e"
+  integrity sha1-Xh9jF8oaJeQN3zZacWJ1evFSNT4=
+  dependencies:
+    async "1.5.2"
+    lru-cache "4.0.0"
 
 call-me-maybe@^1.0.1:
   version "1.0.1"
@@ -1209,6 +1229,11 @@ dotenv@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-7.0.0.tgz#a2be3cd52736673206e8a85fb5210eea29628e7c"
   integrity sha512-M3NhsLbV1i6HuGzBUH8vXrtxOk+tWmzWKDMbAVSUp3Zsjm7ywFeuwrUXhmhQyRK1q5B5GGy7hcXPbj3bnfZg2g==
+
+double-ended-queue@^2.1.0-0:
+  version "2.1.0-0"
+  resolved "https://registry.yarnpkg.com/double-ended-queue/-/double-ended-queue-2.1.0-0.tgz#103d3527fd31528f40188130c841efdd78264e5c"
+  integrity sha1-ED01J/0xUo9AGIEwyEHv3XgmTlw=
 
 ecdsa-sig-formatter@1.0.11:
   version "1.0.11"
@@ -2617,6 +2642,14 @@ lower-case@^1.1.1:
   resolved "https://registry.yarnpkg.com/lower-case/-/lower-case-1.1.4.tgz#9a2cabd1b9e8e0ae993a4bf7d5875c39c42e8eac"
   integrity sha1-miyr0bno4K6ZOkv31YdcOcQujqw=
 
+lru-cache@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.0.0.tgz#b5cbf01556c16966febe54ceec0fb4dc90df6c28"
+  integrity sha1-tcvwFVbBaWb+vlTO7A+03JDfbCg=
+  dependencies:
+    pseudomap "^1.0.1"
+    yallist "^2.0.0"
+
 lru-cache@^4.1.2:
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.5.tgz#8bbe50ea85bed59bc9e33dcab8235ee9bcf443cd"
@@ -3459,7 +3492,7 @@ proxy-from-env@^1.0.0:
   resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.0.0.tgz#33c50398f70ea7eb96d21f7b817630a55791c7ee"
   integrity sha1-M8UDmPcOp+uW0h97gXYwpVeRx+4=
 
-pseudomap@^1.0.2:
+pseudomap@^1.0.1, pseudomap@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
   integrity sha1-8FKijacOYYkX7wqKw0wa5aaChrM=
@@ -3583,6 +3616,25 @@ rechoir@^0.6.2:
   integrity sha1-hSBLVNuoLVdC4oyWdW70OvUOM4Q=
   dependencies:
     resolve "^1.1.6"
+
+redis-commands@^1.2.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/redis-commands/-/redis-commands-1.4.0.tgz#52f9cf99153efcce56a8f86af986bd04e988602f"
+  integrity sha512-cu8EF+MtkwI4DLIT0x9P8qNTLFhQD4jLfxLR0cCNkeGzs87FN6879JOJwNQR/1zD7aSYNbU0hgsV9zGY71Itvw==
+
+redis-parser@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/redis-parser/-/redis-parser-2.6.0.tgz#52ed09dacac108f1a631c07e9b69941e7a19504b"
+  integrity sha1-Uu0J2srBCPGmMcB+m2mUHnoZUEs=
+
+redis@^2.7.1:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/redis/-/redis-2.8.0.tgz#202288e3f58c49f6079d97af7a10e1303ae14b02"
+  integrity sha512-M1OkonEQwtRmZv4tEWF2VgpG0JWJ8Fv1PhlgT5+B+uNq2cA3Rt1Yt/ryoR+vQNOQcIEgdCdfH0jr3bDpihAw1A==
+  dependencies:
+    double-ended-queue "^2.1.0-0"
+    redis-commands "^1.2.0"
+    redis-parser "^2.6.0"
 
 regenerator-runtime@^0.12.0:
   version "0.12.1"
@@ -4422,7 +4474,7 @@ xtend@^4.0.0:
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
   integrity sha1-pcbVMr5lbiPbgg77lDofBJmNY68=
 
-yallist@^2.1.2:
+yallist@^2.0.0, yallist@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
   integrity sha1-HBH5IY8HYImkfdUS+TxmmaaoHVI=
