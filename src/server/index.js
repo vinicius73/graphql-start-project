@@ -41,8 +41,6 @@ const serverFactory = async () => {
 
   const isProduction = config.NODE_ENV === 'production'
 
-  console.log({ schemaDirectives })
-
   const server = new ApolloServer({
     cors: true,
     resolvers,

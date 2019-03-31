@@ -8,6 +8,6 @@ type Product implements IRecord {
 }
 
 type ProductsResource implements IResource {
-  pagination: Pagination!
-  records: [Product]!
+  pagination: Pagination! @cache(ttl: 120)
+  records: [Product]! @cache(ttl: 120)
 }
