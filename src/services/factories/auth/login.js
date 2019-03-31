@@ -4,7 +4,7 @@ const makeError = () => Promise.reject(new Error('Invalid User/Password combinat
 
 const loadUser = (db, email) => db('users')
   .select(['id', 'email', 'password'])
-  .where({ email })
+  .where({ email, is_active: true })
   .first()
   .then(row => {
     if (isEmpty(row)) {

@@ -1,7 +1,7 @@
 const { last, isEmpty } = require('lodash')
 const { makeServicesFactoy } = require('../services')
-const graphqlQueryCompress = require('graphql-query-compress')
 const { generateDataLoaders } = require('../utils/knex/dataloaders')
+const graphqlQueryCompress = require('graphql-query-compress')
 const resources = require('../resolvers/resources')
 
 const debugRequest = req => {
@@ -14,6 +14,11 @@ const debugRequest = req => {
   }
 
   console.log('request on: %s \n -> %s \n', new Date(), query)
+}
+
+const loadUser = (services, token) => {
+  return services.auth
+    .loadUser(token)
 }
 
 /**
@@ -57,7 +62,17 @@ const contextFactory = ({ debug, config }) => {
       dataLoaders: generateDataLoaders(resources, services)
     }
 
-    return Promise.resolve(context)
+    if (!token) {
+      return Promise.resolve(context)
+    }
+
+    return loadUser(services, token)
+      .then(user => {
+        return Promise.resolve({
+          user,
+          ...context
+        })
+      })
   }
 }
 
