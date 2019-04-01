@@ -83,6 +83,7 @@ See `package.json > scripts` for more info.
 
 #### pgadmin4
 When run project in development mode, pgadmin4 will be available in `http://localhost:16543`
+Use `local@local.dev` and value of `DB_PASSWORD` to access pgadmin4
 
 ### prod mode
 Up to 2 pm2 service in cluster mode.

@@ -28,7 +28,7 @@ services:
     image: dpage/pgadmin4
     container_name: "graphql-demo-pgadmin4"
     environment:
-      PGADMIN_DEFAULT_EMAIL: "vinicius73@local.dev"
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USER}
       PGADMIN_DEFAULT_PASSWORD: ${DB_PASSWORD}
     volumes:
       - $PWD/data/pgadmin4/servers.json:/pgadmin4/servers.json
