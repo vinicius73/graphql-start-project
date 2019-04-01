@@ -6,6 +6,9 @@
   "repository": "https://github.com/vinicius73/graphql-auto-resolvers-demo",
   "author": "Vinicius Reis <luiz.vinicius73@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
     "start:dev": "yarn pm2:watch && yarn pm2:logs",
     "start:prod": "yarn pm2:production && yarn pm2:logs",
