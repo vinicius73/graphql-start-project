@@ -1,3 +1,4 @@
 type RootMutations {
   login (email: String!, password: String!): String!
+  addProduct(input: CreateProductInput!): Product!
 }
