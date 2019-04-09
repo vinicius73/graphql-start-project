@@ -1,9 +1,9 @@
 const uuid = require('uuid')
+const { head } = require('lodash')
 
 const AddProductMutation = async (root, { input }, { services }, info) => {
   const { db } = services
-  const { name, client } = input
-  const { description } = input || null
+  const { name, client, description } = input
 
   return db('products')
     .returning('*')
@@ -13,7 +13,7 @@ const AddProductMutation = async (root, { input }, { services }, info) => {
       description,
       client_id: client
     })
-    .then(product => product[0])
+    .then(head)
 }
 
 module.exports = AddProductMutation
