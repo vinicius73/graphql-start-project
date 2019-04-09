@@ -11,3 +11,9 @@ type ProductsResource implements IResource {
   pagination: Pagination! @cache(ttl: 120)
   records: [Product]! @cache(ttl: 120)
 }
+
+input CreateProductInput {
+  name: String!
+  description: String
+  client: ID!
+}

@@ -7,7 +7,7 @@ exports.up = function (knex) {
     table.uuid('client_id').notNullable()
     table.boolean('deleted').defaultTo(false)
     table.timestamp('deleted_at').defaultTo(null)
-    table.timestamps()
+    table.timestamps(true, true)
 
     table.foreign('client_id')
       .references('id')
