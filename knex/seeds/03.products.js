@@ -4,13 +4,14 @@ const uuid = require('uuid')
 
 const newProduct = async (clientId) => {
   const deleted = faker.random.boolean()
+  const createdAt = faker.date.recent(30)
 
   return {
     id: uuid(),
     name: faker.commerce.productName(),
     description: faker.random.boolean() ? faker.lorem.paragraph() : null,
-    created_at: faker.date.recent(30),
-    updated_at: faker.random.boolean() ? faker.date.recent(5) : null,
+    created_at: createdAt,
+    updated_at: faker.random.boolean() ? faker.date.recent(5) : createdAt,
     deleted_at: deleted ? faker.date.recent(5) : null,
     client_id: clientId,
     deleted
