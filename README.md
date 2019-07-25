@@ -89,5 +89,5 @@ Use `local@local.dev` and value of `DB_PASSWORD` to access pgadmin4
 Up to 2 pm2 service in cluster mode.
 
 ```shell
-yarn run docker:dev
+yarn run docker:prod
 ```

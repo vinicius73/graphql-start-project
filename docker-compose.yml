@@ -1,11 +1,11 @@
-version: "3"
+version: "3.5"
 
 services:
   # Database
   postgres:
     image: postgres:11.2
-    restart: always
-    container_name: "graphql-demo-postgres"
+    restart: unless-stopped
+    container_name: "${APP_NAME}-postgres"
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
@@ -15,10 +15,11 @@ services:
     ports:
       - "15432:5432"
   
+  # Redis
   redis:
     image: redis:5-alpine
-    restart: always
-    container_name: "graphql-demo-redis"
+    restart: unless-stopped
+    container_name: "${APP_NAME}-redis"
     ports:
         - "16379:6379"
   
@@ -28,9 +29,9 @@ services:
         context: .
         dockerfile: Dockerfile
     user: "node"
-    restart: always
+    restart: unless-stopped
     working_dir: /home/node/app
-    container_name: "graphql-demo-server"
+    container_name: "${APP_NAME}-server"
     links:
       - postgres
       - redis
@@ -38,9 +39,9 @@ services:
       - postgres
       - redis
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
     volumes:
       - ./:/home/node/app
     ports:
       - ${PORT}:${PORT}
-    command: "npm run startup:prod"
+    command: "yarn run startup:prod"

@@ -1,32 +1,36 @@
-version: '3'
+version: '3.5'
+
+x-networks:
+  &default-networks
+  networks:
+  - app-network
 
 networks:
     app-network:
         driver: bridge
+        name: "${APP_NAME}-network"
 
 services:
   # Database
   postgres:
-    networks:
-      - app-network
+    << : *default-networks
   
   # Redis
   redis:
-    networks:
-      - app-network
+    << : *default-networks
   
   # GraphQL
   server:
-    networks:
-      - app-network
+    << : *default-networks
     environment:
       - NODE_ENV=development
-    command: "npm run startup:dev"
+    command: "yarn run startup:dev"
   
   # PG Admin
   pgadmin:
+    << : *default-networks
     image: dpage/pgadmin4
-    container_name: "graphql-demo-pgadmin4"
+    container_name: "${APP_NAME}-pgadmin4"
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USER}
       PGADMIN_DEFAULT_PASSWORD: ${DB_PASSWORD}
@@ -38,7 +42,5 @@ services:
       - postgres
     depends_on:
       - postgres
-    networks:
-      - app-network
     logging:
       driver: none
