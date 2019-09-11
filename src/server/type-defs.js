@@ -11,7 +11,7 @@ const loadTypeDefs = () => {
   const dirName = resolve(__dirname, '../type-defs')
 
   return loadGraphQLFiles(dirName) // list of contents
-    .then(types => types.join(`\n`)) // join all files in a single string
+    .then(types => types.join('\n')) // join all files in a single string
     .then(typeDefs => gql`${typeDefs}`) // apply "gql" function
 }
 

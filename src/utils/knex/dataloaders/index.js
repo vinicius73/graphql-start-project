@@ -10,7 +10,7 @@ const generateDataLoaders = (resourcesRaw, services) => {
 
   return new Proxy(cache, {
     set () {
-      throw new Error(`it is not possible to modify the dataLoader.`)
+      throw new Error('it is not possible to modify the dataLoader.')
     },
     ownKeys () {
       return map(resources, 'resource')
