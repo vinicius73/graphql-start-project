@@ -18,3 +18,12 @@ input PaginationInput {
   page: Int
   per_page: Int
 }
+
+input Ordination {
+  field: String!
+  direction: String!
+}
+
+input OrdinationInput {
+  ordinances: [Ordination!]!
+}
