@@ -71,8 +71,8 @@ The graphql server will bi aveilable in `http://localhost:7373` by default, see 
 When docker up in dev mode, follow below commands will run.
 
 ```shell
-yarn run knex:migrate
-yarn run knex:seed
+yarn knex:migrate
+yarn knex:seed
 ```
 
 This commands configure and populate the database.
@@ -89,5 +89,5 @@ Use `local@local.dev` and value of `DB_PASSWORD` to access pgadmin4
 Up to 2 pm2 service in cluster mode.
 
 ```shell
-yarn run docker:prod
+yarn docker:prod
 ```
