@@ -33,7 +33,7 @@
   "dependencies": {
     "apollo-server": "^2.9.3",
     "awilix": "^4.2.2",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "cache-manager": "^2.10.0",
     "cache-manager-redis-store": "^1.5.0",
     "config": "^3.2.2",
